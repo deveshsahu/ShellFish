@@ -338,3 +338,18 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Libraries/glfw-3.2.1.bin.WIN64/lib-vc2013
+/Libraries/glfw-3.2.1.bin.WIN64/lib-vc2012
+/Libraries/glfw-3.2.1.bin.WIN64/lib-mingw-w64
+/Libraries/glfw-3.2.1.bin.WIN64/docs/html
+/Libraries/glfw-3.2.1.bin.WIN64/COPYING.txt
+/Libraries/glm-0.9.8.5/glm/cmake
+/Libraries/glm-0.9.8.5/glm/doc
+/Libraries/glm-0.9.8.5/glm/test
+/Libraries/glm-0.9.8.5/glm/util
+/Libraries/glm-0.9.8.5/glm/readme.md
+/Libraries/glm-0.9.8.5/glm/copying.txt
+/Libraries/glm-0.9.8.5/glm/CMakeLists.txt
+/Libraries/glm-0.9.8.5/glm/.travis.yml
+/Libraries/glm-0.9.8.5/glm/.gitignore
+/Libraries/glm-0.9.8.5/glm/.appveyor.yml
