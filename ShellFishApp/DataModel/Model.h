@@ -1,12 +1,9 @@
 #pragma once
-
+#include "../Scenegraph/Node.h"
 #include <string>
 #include <vector>
 #include <memory>
-namespace sg
-{
-	class Node;
-}
+
 namespace model
 {
 	class Model
@@ -16,9 +13,9 @@ namespace model
 		Model();
 		virtual ~Model();
 
-		virtual bool load(const std::string& filePath) = 0;
+		bool load(const std::string& filePath);
 
 	private:
-		std::shared_ptr<sg::Node> iSceneGraphRoot;
+		std::shared_ptr<sg::Node> mSceneGraphRoot;
 	};
 }

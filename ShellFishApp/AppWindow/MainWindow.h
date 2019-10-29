@@ -8,6 +8,11 @@ namespace model
 	class Model;
 }
 
+namespace view
+{
+	class SceneGraphViewer;
+}
+
 namespace controller
 {
 	class MainWindow
@@ -32,7 +37,8 @@ namespace controller
 
 	private:
 		GLFWwindow* mGLWindow;
-		model::Model* mModel;
+		std::shared_ptr<model::Model> mModel;
+		std::shared_ptr<view::SceneGraphViewer> mViewer;
 	};
 }
 

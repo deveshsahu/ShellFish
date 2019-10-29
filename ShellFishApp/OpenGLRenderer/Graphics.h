@@ -18,14 +18,11 @@ namespace Graphics
 
 		static OpenGLGraphics& getInstance();
 
-		/*std::shared_ptr<Scene>*/void createNewScene(int width, int height);
-		void createSceneFromFile(const std::string& filename, int width, int height);
-
 		void render();
 
 	private:
 		OpenGLGraphics();
 
-		std::shared_ptr<Scene> mScene;
+
 	};
 }
