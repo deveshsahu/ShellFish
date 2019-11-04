@@ -1,12 +1,9 @@
 #include "MainWindow.h"
 //#include "MouseEvent.h"
 #include "../DataModel/Model.h"
-#include "../OpenGLRenderer/Graphics.h"
-#include <assert.h>
+#include "../OpenGLView/SceneGraphViewer.h"
+#include "glm/glm.hpp"
 #include <iostream>
-
-static const int WIDTH = 800;
-static const int HEIGHT = 600;
 
 namespace controller
 {
@@ -90,12 +87,9 @@ namespace controller
 		glfwMakeContextCurrent(mGLWindow);
 	}
 
-	bool MainWindow::loadFile()
+	void MainWindow::addModel(std::weak_ptr<model::Model> model)
 	{
-		mModel = std::make_shared<model::Model>();
-		if (!mModel->load("D:\\FirefoxDownloads\\GLTF Samples\\Lantern.glb"))
-			return false;
-		return true;
+		mModel = model;
 	}
 
 	void MainWindow::onCheckError(int error, const char* description)
@@ -116,26 +110,30 @@ namespace controller
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif // DEBUG
 
-		mGLWindow = glfwCreateWindow(WIDTH, HEIGHT, "Main Window", nullptr, nullptr);
-		assert(mGLWindow != nullptr);
+		mGLWindow = glfwCreateWindow(mWidth, mHeight, "Main Window", nullptr, nullptr);
 		glfwSetWindowUserPointer(mGLWindow, this);
 		// Window Resize
 		glfwSetWindowSizeCallback(mGLWindow, MainWindow::onWindowResized);
 		// Mouse Move
 		glfwSetCursorPosCallback(mGLWindow, MainWindow::onMouseMove);
-		// Mouse button
+		// Mouse buttonm
 		glfwSetMouseButtonCallback(mGLWindow, MainWindow::onMouseButton);
 		// Mouse scroll
 		glfwSetScrollCallback(mGLWindow, MainWindow::onMouseScroll);
+
+		// Initialize
+		glfwMakeContextCurrent(mGLWindow);
+		mViewer = std::make_shared<view::SceneGraphViewer>(glm::ivec2(mWidth, mHeight));
+		mViewer->init();
 	}
 
 	void MainWindow::mMainLoop()
 	{
-		//auto scene = mActiveScene.lock();
 		while (!glfwWindowShouldClose(mGLWindow))
 		{
 			glfwMakeContextCurrent(mGLWindow);
-			//Graphics::OpenGLGraphics::getInstance().render();
+			if (auto model = mModel.lock())
+				mViewer->render(model->getRoot());
 			glfwSwapBuffers(mGLWindow);
 			glfwWaitEvents();
 		}

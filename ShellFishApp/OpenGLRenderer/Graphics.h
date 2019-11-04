@@ -1,13 +1,11 @@
 #pragma once
-
+#include "glm/glm.hpp"
 #include <vector>
 #include <string>
 #include <memory>
 
 namespace Graphics
 {
-	class BaseRenderable;
-	class Scene;
 	class OpenGLGraphics
 	{
 	public:
@@ -19,9 +17,12 @@ namespace Graphics
 
 		void initGL();
 
-		void render();
+		void clear(const glm::vec4& color);
+		void viewport(int x, int y, int sx, int sy);
 
 	private:
 		OpenGLGraphics();
+
+		bool mInitGL = false;
 	};
 }

@@ -18,6 +18,7 @@ namespace model
 		virtual ~Model();
 
 		bool load(const std::string& filePath);
+		std::weak_ptr<sg::Node> getRoot() const { return mSceneGraphRoot; }
 
 	private:
 		std::shared_ptr<sg::Node> mSceneGraphRoot;

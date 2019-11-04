@@ -32,7 +32,7 @@ namespace controller
 
 		void createWindow();
 		void activateContext();
-		bool loadFile();
+		void addModel(std::weak_ptr<model::Model> model);
 
 	private:
 		void mInitWindow();
@@ -41,8 +41,11 @@ namespace controller
 
 	private:
 		GLFWwindow* mGLWindow;
-		std::shared_ptr<model::Model> mModel;
+		std::weak_ptr<model::Model> mModel;
 		std::shared_ptr<view::SceneGraphViewer> mViewer;
+
+		int mWidth = 1024;
+		int mHeight = 768;
 	};
 }
 

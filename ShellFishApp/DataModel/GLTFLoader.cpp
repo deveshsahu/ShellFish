@@ -27,6 +27,7 @@ namespace loader
 
 	std::shared_ptr<sg::Node> populateSceneGraph(tinygltf::Model& model)
 	{
+		std::shared_ptr<sg::Node> root;
 		if (model.cameras.size() > 0)
 		{
 			auto& cam = model.cameras[0];
@@ -35,9 +36,16 @@ namespace loader
 				cameranode->setOrthoParam(cam.orthographic.xmag, cam.orthographic.ymag, cam.orthographic.znear, cam.orthographic.zfar);
 			else
 				cameranode->setPerspParam(cam.perspective.aspectRatio, cam.perspective.yfov, cam.perspective.znear, cam.perspective.zfar);
+			root = cameranode;
 			return cameranode;
 		}
-		return std::shared_ptr<sg::Node>();
+		else
+		{
+			auto camnode = std::make_shared<sg::CameraNode>();
+			camnode->setOrthoParam(1.0, 1.0, 0.1, 100.0);
+			root = camnode;
+		}
+		return root;
 	}
 
 	std::shared_ptr<sg::Node> GLTFLoader::loadFromBinFile(const std::string& filepath)
