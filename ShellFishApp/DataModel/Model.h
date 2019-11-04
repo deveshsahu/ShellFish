@@ -1,12 +1,13 @@
 #pragma once
-
 #include <string>
 #include <vector>
 #include <memory>
+
 namespace sg
 {
 	class Node;
 }
+
 namespace model
 {
 	class Model
@@ -16,9 +17,10 @@ namespace model
 		Model();
 		virtual ~Model();
 
-		virtual bool load(const std::string& filePath) = 0;
+		bool load(const std::string& filePath);
+		std::weak_ptr<sg::Node> getRoot() const { return mSceneGraphRoot; }
 
 	private:
-		std::shared_ptr<sg::Node> iSceneGraphRoot;
+		std::shared_ptr<sg::Node> mSceneGraphRoot;
 	};
 }

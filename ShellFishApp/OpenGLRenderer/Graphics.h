@@ -1,5 +1,4 @@
 #pragma once
-
 #include "glm/glm.hpp"
 #include <vector>
 #include <string>
@@ -7,8 +6,6 @@
 
 namespace Graphics
 {
-	class BaseRenderable;
-	class Scene;
 	class OpenGLGraphics
 	{
 	public:
@@ -18,14 +15,14 @@ namespace Graphics
 
 		static OpenGLGraphics& getInstance();
 
-		/*std::shared_ptr<Scene>*/void createNewScene(int width, int height);
-		void createSceneFromFile(const std::string& filename, int width, int height);
+		void initGL();
 
-		void render();
+		void clear(const glm::vec4& color);
+		void viewport(int x, int y, int sx, int sy);
 
 	private:
 		OpenGLGraphics();
 
-		std::shared_ptr<Scene> mScene;
+		bool mInitGL = false;
 	};
 }

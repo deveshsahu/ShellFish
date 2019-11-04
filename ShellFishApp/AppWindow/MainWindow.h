@@ -8,6 +8,11 @@ namespace model
 	class Model;
 }
 
+namespace view
+{
+	class SceneGraphViewer;
+}
+
 namespace controller
 {
 	class MainWindow
@@ -25,6 +30,10 @@ namespace controller
 		static void onMouseButton(GLFWwindow*, int, int, int);
 		static void onMouseScroll(GLFWwindow*, double, double);
 
+		void createWindow();
+		void activateContext();
+		void addModel(std::weak_ptr<model::Model> model);
+
 	private:
 		void mInitWindow();
 		void mMainLoop();
@@ -32,7 +41,11 @@ namespace controller
 
 	private:
 		GLFWwindow* mGLWindow;
-		model::Model* mModel;
+		std::weak_ptr<model::Model> mModel;
+		std::shared_ptr<view::SceneGraphViewer> mViewer;
+
+		int mWidth = 1024;
+		int mHeight = 768;
 	};
 }
 

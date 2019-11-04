@@ -69,7 +69,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -87,12 +90,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(SolutionDir)../../Libraries/glm-0.9.8.5/glm;%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(SolutionDir)../OpenGLView/Debug;%(SolutionDir)../Scenegraph/Debug;%(SolutionDir)../OpenGLRenderer/Debug;%(SolutionDir)../DataModel/Debug;%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Scenegraph.lib;OpenGLRenderer.lib;DataModel.lib;OpenGLView.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -118,22 +122,25 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(SolutionDir)../../Libraries/glm-0.9.8.5/glm;%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(SolutionDir)../OpenGLView/Release;%(SolutionDir)../Scenegraph/Release;%(SolutionDir)../OpenGLRenderer/Release;%(SolutionDir)../DataModel/Release;%(SolutionDir)../../Libraries/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Scenegraph.lib;OpenGLRenderer.lib;DataModel.lib;OpenGLView.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

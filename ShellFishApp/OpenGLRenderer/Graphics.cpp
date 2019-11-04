@@ -1,11 +1,12 @@
 #pragma once
 #include "Graphics.h"
-#include "Scene.h"
+#include "GLUtils.h"
 
 namespace Graphics
 {
 	OpenGLGraphics::OpenGLGraphics()
 	{
+		
 	}
 
 	OpenGLGraphics::~OpenGLGraphics()
@@ -18,20 +19,28 @@ namespace Graphics
 		return instance;
 	}
 
-	/*std::shared_ptr<Scene>*/void OpenGLGraphics::createNewScene(int width, int height)
+	void OpenGLGraphics::initGL()
 	{
-		mScene = std::make_shared<Scene>(width, height);
+		if (mInitGL)
+			return;
+		ogl_LoadFunctions();
+
+#ifdef _DEBUG
+		glDebugMessageCallback(GLUtils::debugCallback, NULL);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
+#endif // _DEBUG
+
+		mInitGL = true;
 	}
 
-	void OpenGLGraphics::createSceneFromFile(const std::string& filename, int width, int height)
+	void OpenGLGraphics::clear(const glm::vec4& color)
 	{
-		mScene = std::make_shared<Scene>(filename, width, height);
-		
-		//mScene->addRenderable();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(color.x, color.y, color.z, color.w);
 	}
 
-	void OpenGLGraphics::render()
+	void OpenGLGraphics::viewport(int x, int y, int sx, int sy)
 	{
-		//mScene->render();
+		glViewport(0, 0, sx, sy);
 	}
 }
