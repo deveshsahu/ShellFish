@@ -1,6 +1,5 @@
 #pragma once
 
-#include "glm/glm.hpp"
 #include <vector>
 #include <string>
 #include <memory>
@@ -18,11 +17,11 @@ namespace Graphics
 
 		static OpenGLGraphics& getInstance();
 
+		void initGL();
+
 		void render();
 
 	private:
 		OpenGLGraphics();
-
-
 	};
 }

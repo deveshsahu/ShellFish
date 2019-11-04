@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include "../Scenegraph/Node.h"
 #include "GLTFLoader.h"
 
 namespace model

@@ -35,8 +35,9 @@ namespace loader
 				cameranode->setOrthoParam(cam.orthographic.xmag, cam.orthographic.ymag, cam.orthographic.znear, cam.orthographic.zfar);
 			else
 				cameranode->setPerspParam(cam.perspective.aspectRatio, cam.perspective.yfov, cam.perspective.znear, cam.perspective.zfar);
+			return cameranode;
 		}
-
+		return std::shared_ptr<sg::Node>();
 	}
 
 	std::shared_ptr<sg::Node> GLTFLoader::loadFromBinFile(const std::string& filepath)

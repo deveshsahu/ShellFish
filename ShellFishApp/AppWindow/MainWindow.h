@@ -30,6 +30,10 @@ namespace controller
 		static void onMouseButton(GLFWwindow*, int, int, int);
 		static void onMouseScroll(GLFWwindow*, double, double);
 
+		void createWindow();
+		void activateContext();
+		bool loadFile();
+
 	private:
 		void mInitWindow();
 		void mMainLoop();

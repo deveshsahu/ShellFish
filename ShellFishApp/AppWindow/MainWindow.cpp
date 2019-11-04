@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 //#include "MouseEvent.h"
+#include "../DataModel/Model.h"
+#include "../OpenGLRenderer/Graphics.h"
 #include <assert.h>
 #include <iostream>
 
@@ -17,7 +19,6 @@ namespace controller
 
 	void MainWindow::onWindowResized(GLFWwindow* window, int width, int height)
 	{
-		//glViewport(0, 0, width, height);
 
 	}
 
@@ -33,7 +34,7 @@ namespace controller
 			return;
 
 		//glfwGetCursorPos(w, &evt.xpos, &evt.ypos);
-
+		/*
 		switch (button)
 		{
 		case GLFW_MOUSE_BUTTON_LEFT:
@@ -71,13 +72,30 @@ namespace controller
 			break;
 		default:
 			//evt.mods = Graphics::Modifier::modInvalid;
-		}
+		}*/
 	}
 
 	void MainWindow::onMouseScroll(GLFWwindow* w, double xoffset, double yoffset)
 	{
 		if (!w)
 			return;
+	}
+
+	void MainWindow::createWindow()
+	{
+	}
+
+	void MainWindow::activateContext()
+	{
+		glfwMakeContextCurrent(mGLWindow);
+	}
+
+	bool MainWindow::loadFile()
+	{
+		mModel = std::make_shared<model::Model>();
+		if (!mModel->load("D:\\FirefoxDownloads\\GLTF Samples\\Lantern.glb"))
+			return false;
+		return true;
 	}
 
 	void MainWindow::onCheckError(int error, const char* description)
@@ -109,18 +127,6 @@ namespace controller
 		glfwSetMouseButtonCallback(mGLWindow, MainWindow::onMouseButton);
 		// Mouse scroll
 		glfwSetScrollCallback(mGLWindow, MainWindow::onMouseScroll);
-
-		glfwMakeContextCurrent(mGLWindow);
-		//ogl_LoadFunctions();
-
-//#ifdef _DEBUG
-//		//glDebugMessageCallback(GLUtils::debugCallback, NULL);
-//		//glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, GL_TRUE);
-//#endif // _DEBUG
-
-		/*mModel = new model::GLTFModel();
-		if (!mModel->load("D:\\FirefoxDownloads\\GLTF Samples\\Lantern.glb"))
-			return;*/
 	}
 
 	void MainWindow::mMainLoop()

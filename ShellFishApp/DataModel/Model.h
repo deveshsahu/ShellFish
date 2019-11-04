@@ -1,8 +1,12 @@
 #pragma once
-#include "../Scenegraph/Node.h"
 #include <string>
 #include <vector>
 #include <memory>
+
+namespace sg
+{
+	class Node;
+}
 
 namespace model
 {
