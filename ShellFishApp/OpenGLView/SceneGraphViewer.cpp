@@ -16,19 +16,22 @@ namespace view
 	}
 	void SceneGraphViewer::render(std::weak_ptr<sg::Node> root)
 	{
-		if (!prepareDraw())
+		if (auto rootNode = root.lock())
 		{
-			return;
-		}
+			if (!prepareDraw())
+			{
+				return;
+			}
 
-		if (!draw())
-		{
-			return;
-		}
+			if (!draw())
+			{
+				return;
+			}
 
-		if (!endDraw())
-		{
-			return;
+			if (!endDraw())
+			{
+				return;
+			}
 		}
 	}
 
@@ -39,7 +42,7 @@ namespace view
 
 	bool SceneGraphViewer::draw()
 	{
-		mOGLGraphics.clear(glm::vec4(1.0, 0.0, 0.0, 1.f));
+		mOGLGraphics.clear(glm::vec4(0.0, 0.0, 0.0, 1.f));
 		return true;
 	}
 

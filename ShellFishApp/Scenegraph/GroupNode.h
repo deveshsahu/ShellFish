@@ -9,8 +9,7 @@ namespace sg
 	{
 	public:
 		GroupNode(const std::string& name);
-		void setOrthoParam();
-		void setPerspParam();
+		void addChild(std::shared_ptr<Node> child);
 
 	protected:
 		std::vector<std::shared_ptr<Node>> mChildren;

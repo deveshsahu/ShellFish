@@ -16,6 +16,8 @@ namespace sg
 		CameraNode();
 		void setOrthoParam(double xmag, double ymag, double znear, double zfar);
 		void setPerspParam(double fovy, double aspectratio, double znear, double zfar);
+		void setCameraMatrix(const glm::mat4& mat);
+		void addChild(std::weak_ptr<Node> child);
 
 	protected:
 		glm::mat4 mCameraMat;
