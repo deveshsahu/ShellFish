@@ -29,7 +29,7 @@ namespace sg
 	{
 		if (auto node = child.lock())
 		{
-			mChildNode = child;
+			mChildNode = node;
 		}
 	}
 }
