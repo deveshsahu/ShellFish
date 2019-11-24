@@ -3,25 +3,12 @@
 #include "assimp/postprocess.h"
 #include "assimp/scene.h"
 #include "../Scenegraph/CameraNode.h"
-#include "../Scenegraph/GroupNode.h"
+#include "../Scenegraph/MeshNode.h"
+#include "../Scenegraph/TransformNode.h"
 #include <glm/glm.hpp>
 
 namespace loader
 {
-	void copyNodes(aiNode node, std::shared_ptr<sg::GroupNode> parent)
-	{
-		if (node.mNumMeshes > 0)
-		{
-			auto nn = std::make_shared<sg::GroupNode>(node.mName.C_Str());
-			//node.mMeshes
-		}
-		else
-		{
-			
-		}
-		
-	}
-
 	glm::mat4 convertToMat4(const aiMatrix4x4& input)
 	{
 		glm::mat4 mat;
@@ -48,6 +35,47 @@ namespace loader
 		return mat;
 	}
 
+	bool copyMeshData(std::shared_ptr<sg::MeshNode>& meshNode, const aiMesh& aimesh)
+	{
+		unsigned int numvtx = aimesh.mNumVertices;
+		meshNode->addVertexData(aimesh.mVertices, numvtx);
+		// TODO Construct material 
+		// Uniform block will be initialized based on shader passed.
+		// Write a universal shader that supports rendering all material types
+		for (int i = 0; i < aimesh.mNumFaces; ++i)
+		{
+			
+		}
+		//meshNode->addIndexData();
+		return true;
+	}
+
+	void copyNodes(aiNode& node, std::shared_ptr<sg::GroupNode> parent, const aiScene& scene)
+	{
+		if (node.mNumMeshes > 0)
+		{
+			for (int i = 0; i < node.mNumMeshes; ++i)
+			{
+				auto meshNode = std::make_shared<sg::MeshNode>(node.mName.C_Str());
+				parent->addChild(meshNode);
+				copyMeshData(meshNode, *scene.mMeshes[node.mMeshes[i]]);
+			}
+			return;
+		}
+
+		auto transformNode = std::make_shared<sg::TransformNode>(node.mName.C_Str());
+		transformNode->setTransform(convertToMat4(node.mTransformation));
+		parent->addChild(transformNode);
+		parent = transformNode;
+
+		for (int i = 0; i < node.mNumChildren; i++)
+		{
+			if (!node.mChildren[i])
+				continue;
+			copyNodes(*node.mChildren[i], parent, scene);
+		}
+	}
+
 	std::shared_ptr<sg::Node> AIParser::loadFromFile(const std::string& filepath)
 	{
 		Assimp::Importer aiImporter;
@@ -68,8 +96,12 @@ namespace loader
 		else
 		{
 			camNode->setOrthoParam(1, 1, 0.1, 100);
-
 		}
+
+		auto modelBaseNode = std::make_shared<sg::GroupNode>("Base Node");
+		camNode->addChild(modelBaseNode);
+		copyNodes(*scene->mRootNode, modelBaseNode, *scene);
+
 		return camNode;
 	}
 }

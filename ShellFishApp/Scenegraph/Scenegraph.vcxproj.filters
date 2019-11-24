@@ -27,6 +27,9 @@
     <ClInclude Include="TransformNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeshNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Node.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TransformNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
