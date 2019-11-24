@@ -6,5 +6,12 @@ namespace sg
 	{
 
 	}
+
+	void GroupNode::addChild(std::shared_ptr<Node> child)
+	{
+		if (child)
+			return;
+		mChildren.push_back(child);
+	}
 	
 }

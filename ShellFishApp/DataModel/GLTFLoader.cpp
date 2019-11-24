@@ -45,6 +45,7 @@ namespace loader
 			camnode->setOrthoParam(1.0, 1.0, 0.1, 100.0);
 			root = camnode;
 		}
+		
 		return root;
 	}
 

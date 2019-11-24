@@ -19,4 +19,17 @@ namespace sg
 		mCamType = CamType::ctPersp;
 		mProjectionMat = glm::perspective(fovy, aspectratio, znear, zfar);
 	}
+
+	void CameraNode::setCameraMatrix(const glm::mat4& mat)
+	{
+		mCameraMat = mat;
+	}
+
+	void CameraNode::addChild(std::weak_ptr<Node> child)
+	{
+		if (auto node = child.lock())
+		{
+			mChildNode = node;
+		}
+	}
 }
