@@ -10,6 +10,7 @@ namespace sg
 	public:
 		GroupNode(const std::string& name);
 		void addChild(std::shared_ptr<Node> child);
+		std::vector<std::shared_ptr<Node>> getChildren() { return mChildren; }
 
 	protected:
 		std::vector<std::shared_ptr<Node>> mChildren;

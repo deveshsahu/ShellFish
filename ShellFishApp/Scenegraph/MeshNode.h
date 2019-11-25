@@ -6,7 +6,12 @@
 
 namespace sg
 {
-	class MeshNode : public Node
+	/**
+	 * @brief Holds mesh data buffer
+	 * TODO Needs to be extended to use CGAL library for
+	 * handling and manipulating mesh data
+	 */
+	class MeshNode final : public Node
 	{
 	public:
 		MeshNode(const std::string& name);
@@ -17,8 +22,8 @@ namespace sg
 		 * @brief Copy vertex data to the mesh
 		 * Accepts only float with 3 vectors
 		 */
-		void addVertexData(const void* dataStream, unsigned int numVtx);
-		//void addIndexData(const void)
+		void addVertexData(const void* dataStream, size_t numVtx);
+		void addIndexData(const void* dataStream, size_t numIdx);
 
 	private:
 		bool mVisibility;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
-#include <glm/glm.hpp>
+#include "../../Libraries/glm-0.9.8.5/glm/glm/glm.hpp"
+
 namespace sg
 {
 	enum class CamType
@@ -18,6 +19,15 @@ namespace sg
 		void setPerspParam(double fovy, double aspectratio, double znear, double zfar);
 		void setCameraMatrix(const glm::mat4& mat);
 		void addChild(std::weak_ptr<Node> child);
+		std::shared_ptr<sg::Node> getChild() { return mChildNode; }
+
+		glm::mat4 getCameraMatrix() const { return mCameraMat; }
+		glm::mat4 getProjectionMatrix() const { return mProjectionMat; }
+
+		virtual void visit(std::shared_ptr<BaseVisitor> visitor) override;
+
+	protected:
+		std::shared_ptr<CameraNode> getSharedFromThis();
 
 	protected:
 		glm::mat4 mCameraMat;

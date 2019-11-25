@@ -19,7 +19,7 @@ namespace view
 		void render(std::weak_ptr<sg::Node> root);
 
 	private:
-		bool prepareDraw();
+		bool prepareDraw(std::shared_ptr<sg::Node>& root);
 		bool draw();
 		bool endDraw();
 
