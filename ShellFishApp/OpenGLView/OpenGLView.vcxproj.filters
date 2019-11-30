@@ -18,9 +18,15 @@
     <ClInclude Include="SceneGraphViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RenderVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneGraphViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

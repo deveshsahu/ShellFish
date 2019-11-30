@@ -1,4 +1,5 @@
 #include "CameraNode.h"
+#include "BaseVisitor.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace sg
@@ -31,5 +32,25 @@ namespace sg
 		{
 			mChildNode = node;
 		}
+	}
+
+	void CameraNode::visit(std::shared_ptr<BaseVisitor> visitor)
+	{
+		visitor->visit(getSharedFromThis());
+	}
+
+	std::shared_ptr<CameraNode> CameraNode::getSharedFromThis()
+	{
+		std::shared_ptr<CameraNode> ptr;
+		try
+		{
+			auto nodeptr = Node::getSharedFromThis();
+			ptr = std::static_pointer_cast<CameraNode>(nodeptr);
+		}
+		catch(void*)
+		{
+			
+		}
+		return ptr;
 	}
 }

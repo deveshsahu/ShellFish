@@ -18,7 +18,7 @@ namespace view
 	{
 		if (auto rootNode = root.lock())
 		{
-			if (!prepareDraw())
+			if (!prepareDraw(rootNode))
 			{
 				return;
 			}
@@ -35,14 +35,16 @@ namespace view
 		}
 	}
 
-	bool SceneGraphViewer::prepareDraw()
+	bool SceneGraphViewer::prepareDraw(std::shared_ptr<sg::Node>& root)
 	{
+		
 		return true;
 	}
 
 	bool SceneGraphViewer::draw()
 	{
 		mOGLGraphics.clear(glm::vec4(0.0, 0.0, 0.0, 1.f));
+
 		return true;
 	}
 

@@ -353,3 +353,8 @@ healthchecksdb
 /Libraries/glm-0.9.8.5/glm/.travis.yml
 /Libraries/glm-0.9.8.5/glm/.gitignore
 /Libraries/glm-0.9.8.5/glm/.appveyor.yml
+/ShellFishApp/Scenegraph/Release64/Scenegraph.tlog
+/ShellFishApp/OpenGLView/Release64
+/ShellFishApp/OpenGLRenderer/Release64
+/ShellFishApp/DataModel/Release64
+/ShellFishApp/Scenegraph/Debug64

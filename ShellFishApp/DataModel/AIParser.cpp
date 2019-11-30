@@ -42,11 +42,17 @@ namespace loader
 		// TODO Construct material 
 		// Uniform block will be initialized based on shader passed.
 		// Write a universal shader that supports rendering all material types
+		std::vector<glm::vec3> texcoords;
+		std::vector<unsigned int> indexList;
+		indexList.reserve(aimesh.mNumFaces * size_t(3)); // Reserve enough space for triangular mesh
 		for (int i = 0; i < aimesh.mNumFaces; ++i)
 		{
-			
+			for (int j = 0; j < aimesh.mFaces->mNumIndices; ++j)
+			{
+				indexList.push_back(aimesh.mFaces[i].mIndices[j]);
+			}
 		}
-		//meshNode->addIndexData();
+		meshNode->addIndexData(indexList.data(), indexList.size());
 		return true;
 	}
 
