@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "../../Libraries/glm-0.9.8.5/glm/glm/glm.hpp"
+#include <glm/glm.hpp>
 
 namespace sg
 {
