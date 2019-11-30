@@ -358,3 +358,7 @@ healthchecksdb
 /ShellFishApp/OpenGLRenderer/Release64
 /ShellFishApp/DataModel/Release64
 /ShellFishApp/Scenegraph/Debug64
+/ShellFishApp/DataModel/Debug64
+/ShellFishApp/OpenGLRenderer/Debug64
+/ShellFishApp/OpenGLView/Debug64
+/ShellFishApp/Scenegraph/Release64
