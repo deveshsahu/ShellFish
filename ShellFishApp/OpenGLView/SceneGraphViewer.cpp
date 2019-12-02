@@ -1,5 +1,6 @@
 #include "SceneGraphViewer.h"
 #include "Graphics.h"
+#include "RenderVisitor.h"
 namespace view
 {
 	SceneGraphViewer::SceneGraphViewer(const glm::ivec2& viewportSize):
@@ -18,10 +19,6 @@ namespace view
 	{
 		if (auto rootNode = root.lock())
 		{
-			if (!prepareDraw(rootNode))
-			{
-				return;
-			}
 
 			if (!draw())
 			{

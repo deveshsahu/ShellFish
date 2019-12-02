@@ -125,6 +125,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundRenderable.cpp" />
+    <ClCompile Include="BufferManager.cpp" />
+    <ClCompile Include="BufferObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="GLUtils.cpp" />
@@ -141,6 +143,8 @@
   <ItemGroup>
     <ClInclude Include="BackgroundRenderable.h" />
     <ClInclude Include="BaseRenderable.h" />
+    <ClInclude Include="BufferManager.h" />
+    <ClInclude Include="BufferObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="GLUtils.h" />
@@ -149,11 +153,13 @@
     <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="ProgramLibrary.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TriangleRenderable.h" />
+    <ClInclude Include="UniqueID.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="ViewMatrix.h" />
   </ItemGroup>

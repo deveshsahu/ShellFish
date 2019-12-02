@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseRenderable.h" />
     <ClInclude Include="BaseVisitor.h" />
     <ClInclude Include="CameraNode.h" />
     <ClInclude Include="GroupNode.h" />

@@ -1,9 +1,11 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <memory>
+#include <vector>
 namespace sg
 {
 	class Node;
+	class BaseRenderable;
 }
 namespace Graphics
 {
@@ -26,5 +28,6 @@ namespace view
 	private:
 		Graphics::OpenGLGraphics& mOGLGraphics;
 		glm::ivec2 mViewportSize;
+		std::vector<s
 	};
 }

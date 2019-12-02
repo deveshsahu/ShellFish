@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "BaseRenderable.h"
 
 #include <vector>
 #include <glm/glm.hpp>
@@ -11,7 +12,7 @@ namespace sg
 	 * TODO Needs to be extended to use CGAL library for
 	 * handling and manipulating mesh data
 	 */
-	class MeshNode final : public Node
+	class MeshNode final : public Node, public BaseRenderable
 	{
 	public:
 		MeshNode(const std::string& name);

@@ -63,6 +63,12 @@
     <ClCompile Include="utils.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BufferObject.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRenderable.h">
@@ -114,6 +120,18 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObject.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UniqueID.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
