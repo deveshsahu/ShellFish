@@ -131,7 +131,7 @@
     <ClInclude Include="BufferManager.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniqueID.h">
+    <ClInclude Include="UniqueIDGenerator.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

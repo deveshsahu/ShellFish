@@ -5,11 +5,11 @@
 namespace sg
 {
 	class Node;
-	class BaseRenderable;
 }
 namespace Graphics
 {
 	class OpenGLGraphics;
+	class BaseRenderable;
 }
 namespace view
 {
@@ -20,6 +20,8 @@ namespace view
 		bool init();
 		void render(std::weak_ptr<sg::Node> root);
 
+		void setSceneDirty(bool dirty);
+
 	private:
 		bool prepareDraw(std::shared_ptr<sg::Node>& root);
 		bool draw();
@@ -28,6 +30,8 @@ namespace view
 	private:
 		Graphics::OpenGLGraphics& mOGLGraphics;
 		glm::ivec2 mViewportSize;
-		std::vector<s
+		std::vector < std::weak_ptr<Graphics::BaseRenderable >> mRenderableList;
+
+		bool mSceneDirty = true;
 	};
 }

@@ -6,7 +6,7 @@
 
 namespace view
 {
-	RenderVisitor::RenderVisitor(std::vector<std::weak_ptr<sg::BaseRenderable>>& inRenderableList) :
+	RenderVisitor::RenderVisitor(std::vector<std::weak_ptr<Graphics::BaseRenderable>>& inRenderableList) :
 		sg::BaseVisitor("Render"),
 		mRenderableList(inRenderableList)
 	{
@@ -37,6 +37,11 @@ namespace view
 
 	void RenderVisitor::visit(std::shared_ptr<sg::MeshNode> meshnode)
 	{
-		mRenderableList.push_back(meshnode);
+		mRenderableList.push_back(meshnode->getRenderable());
+	}
+
+	void RenderVisitor::visit(std::shared_ptr<sg::Node> node)
+	{
+
 	}
 }

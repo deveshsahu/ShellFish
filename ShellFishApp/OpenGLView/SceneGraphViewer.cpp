@@ -1,6 +1,8 @@
 #include "SceneGraphViewer.h"
 #include "Graphics.h"
 #include "RenderVisitor.h"
+#include "Node.h"
+#include "BaseRenderable.h"
 namespace view
 {
 	SceneGraphViewer::SceneGraphViewer(const glm::ivec2& viewportSize):
@@ -19,8 +21,19 @@ namespace view
 	{
 		if (auto rootNode = root.lock())
 		{
+			if (!prepareDraw(rootNode))
+				return;
 
-			if (!draw())
+			for (auto& renderableWk : mRenderableList)
+			{
+				if (auto renderable = renderableWk.lock())
+				{
+					renderable->drawBegin();
+					renderable->draw();
+					renderable->drawEnd();
+				}
+			}
+			/*if (!draw())
 			{
 				return;
 			}
@@ -28,13 +41,32 @@ namespace view
 			if (!endDraw())
 			{
 				return;
-			}
+			}*/
 		}
+	}
+
+	void SceneGraphViewer::setSceneDirty(bool dirty)
+	{
+		mSceneDirty = dirty;
 	}
 
 	bool SceneGraphViewer::prepareDraw(std::shared_ptr<sg::Node>& root)
 	{
-		
+		// Only perform prep if list is empty or scene is dirty	
+		if (mRenderableList.empty() || mSceneDirty)
+		{
+			auto renderVisitor = std::make_shared<RenderVisitor> (mRenderableList);
+			root->visit(renderVisitor);
+			
+			for (auto& renderableWk : mRenderableList)
+			{
+				if (auto renderable = renderableWk.lock())
+				{
+					//renderable->
+				}
+			}
+		}
+
 		return true;
 	}
 

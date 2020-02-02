@@ -8,16 +8,6 @@ namespace sg
 
 	}
 
-	void MeshNode::setVisibility(bool visible)
-	{
-		mVisibility = visible;
-	}
-
-	bool MeshNode::getVisibility() const
-	{
-		return mVisibility;
-	}
-
 	void MeshNode::addVertexData(const void* dataStream, size_t numVtx)
 	{
 		if (mVertexList.size() > 0)

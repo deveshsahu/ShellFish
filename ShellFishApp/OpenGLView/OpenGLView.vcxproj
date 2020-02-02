@@ -95,6 +95,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%(SolutionDir)..\..\Libraries\glm-0.9.8.5\glm;%(ProjectDir)..\OpenGLRenderer;%(ProjectDir)..\Scenegraph</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

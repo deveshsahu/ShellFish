@@ -3,13 +3,9 @@
 namespace sg
 {
 	Node::Node(const std::string& name)
-		:mName(name)
+		:mName(name),
+		mID(NodeIDGenerator::generate())
 	{
-	}
-
-	void Node::setName(const std::string& name)
-	{
-		mName = name;
 	}
 
 	void Node::visit(std::shared_ptr<BaseVisitor> visitor)

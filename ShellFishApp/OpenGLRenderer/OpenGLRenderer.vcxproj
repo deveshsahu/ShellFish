@@ -84,6 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%(SolutionDir)..\..\Libraries\glm-0.9.8.5\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug64|Win32'">
@@ -159,7 +160,7 @@
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TriangleRenderable.h" />
-    <ClInclude Include="UniqueID.h" />
+    <ClInclude Include="UniqueIDGenerator.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="ViewMatrix.h" />
   </ItemGroup>
