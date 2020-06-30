@@ -104,9 +104,41 @@ namespace loader
 			camNode->setOrthoParam(1, 1, 0.1, 100);
 		}
 
+
 		auto modelBaseNode = std::make_shared<sg::GroupNode>("Base Node");
 		camNode->addChild(modelBaseNode);
-		copyNodes(*scene->mRootNode, modelBaseNode, *scene);
+		if (scene->mNumMeshes == 1)
+		{
+			// Assuming triangle primitive for now
+			auto meshNode = std::make_shared<sg::MeshNode>("lonemesh");
+			modelBaseNode->addChild(meshNode);
+			if (scene->mMeshes[0]->HasPositions())
+			{
+				const auto& mesh = scene->mMeshes[0];
+				std::vector<glm::vec3> vtxList(mesh->mNumVertices);
+				for (int i = 0; i < mesh->mNumVertices; ++i)
+					vtxList[i] = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
+				meshNode->addVertexData(vtxList.data(), mesh->mNumVertices);
+			}
+
+			if (scene->mMeshes[0]->HasFaces())
+			{
+				const auto& mesh = scene->mMeshes[0];
+
+				std::vector<unsigned int> idxList;
+				unsigned int start = 0;
+				for (int i = 0; i < mesh->mNumFaces; ++i)
+				{
+					idxList.resize(start + mesh->mFaces[i].mNumIndices);
+					memcpy_s(mesh->mFaces[i].mIndices, mesh->mFaces[i].mNumIndices, &idxList[start], mesh->mFaces[i].mNumIndices);
+					start += mesh->mFaces[i].mNumIndices;
+				}
+				meshNode->addVertexData(idxList.data(), idxList.size());
+			}
+			meshNode->finalize();
+		}
+		else
+			copyNodes(*scene->mRootNode, modelBaseNode, *scene);
 
 		return camNode;
 	}

@@ -36,9 +36,7 @@ namespace Graphics
 		inline void setInfo(const bkgInfo& info);
 
 		bool init() override;
-		void drawBegin() override;
 		void draw() override;
-		void drawEnd() override;
 
 	private:
 		void mUpdateVtx();

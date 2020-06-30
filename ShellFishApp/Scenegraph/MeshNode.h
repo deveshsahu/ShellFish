@@ -30,11 +30,13 @@ namespace sg
 
 		virtual void visit(std::shared_ptr<BaseVisitor> visitor) override;
 
+		void finalize();
+
 	private:
 		bool mVisibility = true;
 
 		std::vector<glm::vec3> mVertexList;
-		std::vector<glm::uvec3> mTriangleIndexList;
+		std::vector<unsigned int> mTriangleIndexList;
 		std::vector<glm::vec4> mColorList;
 
 		std::shared_ptr<Graphics::BaseRenderable> mRenderable;

@@ -10,7 +10,6 @@ namespace view
 		sg::BaseVisitor("Render"),
 		mRenderableList(inRenderableList)
 	{
-
 	}
 
 	RenderVisitor::~RenderVisitor()

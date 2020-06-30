@@ -51,14 +51,11 @@ namespace Graphics
 		return true;
 	}
 
-	void BackgroundRenderable::drawBegin()
+	void BackgroundRenderable::draw()
 	{
 		mProgram.useProgram();
 		glActiveTexture(GL_TEXTURE0);
-	}
 
-	void BackgroundRenderable::draw()
-	{
 		glBindBufferBase(GL_UNIFORM_BUFFER, 1, mUniformBlock); // Binding point-> binding = 1
 		glBindVertexArray(m_vao);
 		if (mInfo.type == bkgType::IMG)
@@ -66,11 +63,6 @@ namespace Graphics
 		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glBindVertexArray(0);
-	}
-
-	void BackgroundRenderable::drawEnd()
-	{
-		
 	}
 
 	void BackgroundRenderable::mUpdateVtx()

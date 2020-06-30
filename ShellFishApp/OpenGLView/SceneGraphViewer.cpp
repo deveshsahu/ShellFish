@@ -72,7 +72,7 @@ namespace view
 
 	bool SceneGraphViewer::draw()
 	{
-		mOGLGraphics.clear(glm::vec4(0.0, 0.0, 0.0, 1.f));
+		mOGLGraphics.clear(glm::vec4(1.0, 0.0, 0.0, 1.f));
 
 		return true;
 	}
