@@ -136,11 +136,13 @@
     <ClInclude Include="AIParser.h" />
     <ClInclude Include="GLTFLoader.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="SyntheticModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLTFLoader.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="AIParser.cpp" />
+    <ClCompile Include="SyntheticModel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

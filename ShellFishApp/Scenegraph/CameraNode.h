@@ -17,6 +17,7 @@ namespace sg
 		CameraNode();
 		void setOrthoParam(double xmag, double ymag, double znear, double zfar);
 		void setPerspParam(double fovy, double aspectratio, double znear, double zfar);
+		void setCamera(const glm::vec3& eye, const glm::vec3& center, const glm::vec3& up);
 		void setCameraMatrix(const glm::mat4& mat);
 		void addChild(std::weak_ptr<Node> child);
 		std::shared_ptr<sg::Node> getChild() { return mChildNode; }

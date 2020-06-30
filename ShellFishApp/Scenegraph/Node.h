@@ -32,9 +32,6 @@ namespace sg
 		virtual void visit(std::shared_ptr<BaseVisitor> visitor);
 
 	protected:
-		std::shared_ptr<Node> getSharedFromThis();
-
-	protected:
 		std::string mName;
 		const ID mID;
 	};

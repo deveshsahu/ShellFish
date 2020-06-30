@@ -12,6 +12,7 @@ namespace sg
 		glm::mat4 getTransform() const { return mTransform; }
 
 	private:
+		std::shared_ptr<TransformNode> getSharedFromThis();
 		glm::mat4 mTransform;
 	};
 }

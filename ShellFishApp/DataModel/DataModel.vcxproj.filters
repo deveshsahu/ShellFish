@@ -24,6 +24,9 @@
     <ClInclude Include="AIParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SyntheticModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Model.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AIParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntheticModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

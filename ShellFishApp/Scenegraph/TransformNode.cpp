@@ -11,4 +11,18 @@ namespace sg
 	{
 		mTransform = xform;
 	}
+
+	std::shared_ptr<TransformNode> TransformNode::getSharedFromThis()
+	{
+		std::shared_ptr<TransformNode> xformnode;
+		try
+		{
+			xformnode = std::static_pointer_cast<TransformNode>(shared_from_this());
+		}
+		catch (...)
+		{
+
+		}
+		return xformnode;
+	}
 }

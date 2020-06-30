@@ -33,7 +33,7 @@ namespace Graphics
 	public:
 		BackgroundRenderable(const std::string & name);
 
-		inline void setInfo(const bkgInfo& info);
+		void setInfo(const bkgInfo& info) { mInfo = info; }
 
 		bool init() override;
 		void draw() override;

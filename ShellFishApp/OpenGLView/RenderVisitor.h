@@ -36,10 +36,11 @@ namespace view
 		void visit(std::shared_ptr<sg::CameraNode> camnode) override;
 		void visit(std::shared_ptr<sg::TransformNode> xformnode) override;
 		void visit(std::shared_ptr<sg::MeshNode> meshnode) override;
-		void visit(std::shared_ptr<sg::Node> node) override;
+		void visit(std::shared_ptr<sg::GroupNode> grpnode) override;
+		//void visit(std::shared_ptr<sg::Node> node) override;
 		
-
 	private:
+		std::shared_ptr<RenderVisitor> getSharedFromThis();
 		Transforms mTransforms;
 		std::vector<std::weak_ptr<Graphics::BaseRenderable>>& mRenderableList;
 	};

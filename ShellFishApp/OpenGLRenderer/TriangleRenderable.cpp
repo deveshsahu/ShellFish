@@ -17,7 +17,6 @@ namespace Graphics
 
 	bool TriangleRenderable::init()
 	{
-		return true;
 		mProgram.addShader("SimpleVertex");
 		mProgram.addShader("SimpleFragment");
 		if (!mProgram.createProgram())
@@ -28,7 +27,6 @@ namespace Graphics
 
 	void TriangleRenderable::drawBegin()
 	{
-		return;
 		mProgram.useProgram();
 		glBindBufferBase(GL_UNIFORM_BUFFER, 0, mViewMatrixUniformBufferID); // Bound to binding pt 0
 		glBindVertexArray(m_vao);
@@ -37,8 +35,7 @@ namespace Graphics
 
 	void TriangleRenderable::draw()
 	{
-		glClearColor(1.0, 0.0, 0.0, 1.0);
-		//glDrawElements(GL_TRIANGLES, mIndexData.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, mIndexData.size(), GL_UNSIGNED_INT, 0);
 	}
 
 	void TriangleRenderable::drawEnd()

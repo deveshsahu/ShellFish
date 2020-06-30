@@ -10,6 +10,7 @@ namespace Graphics
 {
 	class OpenGLGraphics;
 	class BaseRenderable;
+	class BackgroundRenderable;
 }
 namespace view
 {
@@ -31,6 +32,7 @@ namespace view
 		Graphics::OpenGLGraphics& mOGLGraphics;
 		glm::ivec2 mViewportSize;
 		std::vector < std::weak_ptr<Graphics::BaseRenderable >> mRenderableList;
+		std::shared_ptr<Graphics::BackgroundRenderable> mBackground;
 
 		bool mSceneDirty = true;
 	};

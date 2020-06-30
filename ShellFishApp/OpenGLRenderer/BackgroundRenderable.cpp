@@ -11,10 +11,10 @@ namespace Graphics
 		setDirty(VTX);
 	}
 
-	void BackgroundRenderable::setInfo(const bkgInfo & info)
+	/*void BackgroundRenderable::setInfo(const bkgInfo & info)
 	{
 		mInfo = info;
-	}
+	}*/
 
 	bool BackgroundRenderable::init()
 	{

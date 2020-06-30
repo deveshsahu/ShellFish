@@ -33,6 +33,9 @@ namespace sg
 		void finalize();
 
 	private:
+		std::shared_ptr<MeshNode> getSharedFromThis();
+
+
 		bool mVisibility = true;
 
 		std::vector<glm::vec3> mVertexList;

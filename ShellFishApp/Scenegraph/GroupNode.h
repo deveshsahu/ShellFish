@@ -11,8 +11,12 @@ namespace sg
 		GroupNode(const std::string& name);
 		void addChild(std::shared_ptr<Node> child);
 		std::vector<std::shared_ptr<Node>> getChildren() { return mChildren; }
+		virtual void visit(std::shared_ptr<BaseVisitor> visitor) override;
 
 	protected:
 		std::vector<std::shared_ptr<Node>> mChildren;
+
+	private:
+		std::shared_ptr<GroupNode> getSharedFromThis();
 	};
 }

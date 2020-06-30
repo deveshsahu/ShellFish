@@ -17,10 +17,10 @@ namespace model
 		Model();
 		virtual ~Model();
 
-		bool load(const std::string& filePath);
+		virtual bool load(const std::string& filePath);
 		std::weak_ptr<sg::Node> getRoot() const { return mSceneGraphRoot; }
 
-	private:
+	protected:
 		std::shared_ptr<sg::Node> mSceneGraphRoot;
 	};
 }

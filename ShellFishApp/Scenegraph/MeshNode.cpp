@@ -27,11 +27,24 @@ namespace sg
 
 	void MeshNode::visit(std::shared_ptr<BaseVisitor> visitor)
 	{
-		visitor->visit(shared_from_this());
+		visitor->visit(getSharedFromThis());
 	}
 
 	void MeshNode::finalize()
 	{
 		mRenderable = std::make_shared<Graphics::TriangleRenderable>("temp", mVertexList, mTriangleIndexList);
+	}
+
+	std::shared_ptr<MeshNode> MeshNode::getSharedFromThis()
+	{
+		std::shared_ptr<MeshNode> meshnode;
+		try
+		{
+			meshnode = std::static_pointer_cast<MeshNode>(shared_from_this());
+		}
+		catch (...)
+		{
+		}
+		return meshnode;
 	}
 }

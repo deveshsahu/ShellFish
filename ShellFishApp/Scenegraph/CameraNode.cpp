@@ -21,6 +21,11 @@ namespace sg
 		mProjectionMat = glm::perspective(fovy, aspectratio, znear, zfar);
 	}
 
+	void CameraNode::setCamera(const glm::vec3& eye, const glm::vec3& center, const glm::vec3& up)
+	{
+		mCameraMat = glm::lookAt(eye, center, up);
+	}
+
 	void CameraNode::setCameraMatrix(const glm::mat4& mat)
 	{
 		mCameraMat = mat;
@@ -44,8 +49,7 @@ namespace sg
 		std::shared_ptr<CameraNode> ptr;
 		try
 		{
-			auto nodeptr = Node::getSharedFromThis();
-			ptr = std::static_pointer_cast<CameraNode>(nodeptr);
+			ptr = std::static_pointer_cast<CameraNode>(shared_from_this());
 		}
 		catch(void*)
 		{

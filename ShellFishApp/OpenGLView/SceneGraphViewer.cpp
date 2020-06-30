@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include "RenderVisitor.h"
 #include "Node.h"
-#include "BaseRenderable.h"
+#include "BackgroundRenderable.h"
 namespace view
 {
 	SceneGraphViewer::SceneGraphViewer(const glm::ivec2& viewportSize):
@@ -21,27 +21,17 @@ namespace view
 	{
 		if (auto rootNode = root.lock())
 		{
-			if (!prepareDraw(rootNode))
-				return;
+			bool success = prepareDraw(rootNode);
+			if (!success)
+				return; // add error msg
 
-			for (auto& renderableWk : mRenderableList)
-			{
-				if (auto renderable = renderableWk.lock())
-				{
-					renderable->drawBegin();
-					renderable->draw();
-					renderable->drawEnd();
-				}
-			}
-			/*if (!draw())
-			{
-				return;
-			}
+			success = draw();
+			if (!success)
+				return; // add error msg
 
-			if (!endDraw())
-			{
-				return;
-			}*/
+			success = endDraw();
+			if (!success)
+				return; // add error msg
 		}
 	}
 
@@ -53,27 +43,42 @@ namespace view
 	bool SceneGraphViewer::prepareDraw(std::shared_ptr<sg::Node>& root)
 	{
 		// Only perform prep if list is empty or scene is dirty	
-		if (mRenderableList.empty() || mSceneDirty)
+		if (mSceneDirty)
 		{
 			auto renderVisitor = std::make_shared<RenderVisitor> (mRenderableList);
 			root->visit(renderVisitor);
-			
 			for (auto& renderableWk : mRenderableList)
 			{
 				if (auto renderable = renderableWk.lock())
-				{
-					//renderable->
-				}
+					renderable->init();
 			}
+			mBackground = std::make_shared<Graphics::BackgroundRenderable>("bkg");
+			Graphics::BackgroundRenderable::bkgInfo bkginfo;
+			bkginfo.type = Graphics::BackgroundRenderable::bkgType::SOLID;
+			mBackground->setInfo(bkginfo);
+			if (!mBackground->init())
+			{
+				mBackground = nullptr;
+			}
+			mSceneDirty = false;
 		}
-
 		return true;
 	}
 
 	bool SceneGraphViewer::draw()
 	{
-		mOGLGraphics.clear(glm::vec4(1.0, 0.0, 0.0, 1.f));
-
+		mOGLGraphics.clear(glm::vec4(0.0, 0.0, 0.0, 1.f));
+		if (mBackground)
+			mBackground->draw();
+		for (auto& renderableWk : mRenderableList)
+		{
+			if (auto renderable = renderableWk.lock())
+			{
+				renderable->drawBegin();
+				renderable->draw();
+				renderable->drawEnd();
+			}
+		}
 		return true;
 	}
 
