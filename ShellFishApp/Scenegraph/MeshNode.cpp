@@ -9,20 +9,18 @@ namespace sg
 	{
 	}
 
-	void MeshNode::addVertexData(const void* dataStream, size_t numVtx)
+	void MeshNode::addVertexData(const std::vector<glm::vec3>& vtxData)
 	{
 		if (mVertexList.size() > 0)
 			mVertexList.clear();
-		mVertexList.reserve(numVtx);
-		memcpy(mVertexList.data(), dataStream, numVtx * sizeof(glm::vec3));
+		mVertexList = vtxData;
 	}
 
-	void MeshNode::addIndexData(const void* dataStream, size_t numIdx)
+	void MeshNode::addIndexData(const std::vector<unsigned int>& idxData)
 	{
 		if (mTriangleIndexList.size() > 0)
 			mTriangleIndexList.clear();
-		mTriangleIndexList.reserve(numIdx);
-		memcpy(mTriangleIndexList.data(), dataStream, numIdx * sizeof(unsigned int));
+		mTriangleIndexList = idxData;
 	}
 
 	void MeshNode::visit(std::shared_ptr<BaseVisitor> visitor)
@@ -32,7 +30,9 @@ namespace sg
 
 	void MeshNode::finalize()
 	{
-		mRenderable = std::make_shared<Graphics::TriangleRenderable>("temp", mVertexList, mTriangleIndexList);
+		auto renderable = std::make_shared<Graphics::TriangleRenderable>(mName, mVertexList, mTriangleIndexList);
+		renderable->setColor(mColor);
+		mRenderable = renderable;
 	}
 
 	std::shared_ptr<MeshNode> MeshNode::getSharedFromThis()

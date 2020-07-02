@@ -69,6 +69,9 @@
     <ClCompile Include="BufferManager.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ViewBufferObject.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRenderable.h">
@@ -132,6 +135,9 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UniqueIDGenerator.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="viewBufferObject.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

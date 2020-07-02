@@ -1,6 +1,7 @@
 #include "TriangleRenderable.h"
 #include "glm/glm.hpp"
 #include <vector>
+#include "GLUtils.h"
 
 namespace Graphics
 {
@@ -22,15 +23,18 @@ namespace Graphics
 		if (!mProgram.createProgram())
 			return false;
 		updateVtx();
+
 		return true;
 	}
 
 	void TriangleRenderable::drawBegin()
 	{
 		mProgram.useProgram();
-		glBindBufferBase(GL_UNIFORM_BUFFER, 0, mViewMatrixUniformBufferID); // Bound to binding pt 0
 		glBindVertexArray(m_vao);
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, )
+		glUniformMatrix4fv(3, 1, GL_FALSE, &mModelMatrix[0][0]);
+		glUniform4fv(4, 1, &mColor[0]);
+
+		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 	}
 
 	void TriangleRenderable::draw()
@@ -59,6 +63,7 @@ namespace Graphics
 		glGenBuffers(1, &mIdxBufferId);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIdxBufferId);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndexData.size() * sizeof(unsigned int), mIndexData.data(), GL_STATIC_DRAW);
+		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 
 		unsetDirty(VTX);
 	}

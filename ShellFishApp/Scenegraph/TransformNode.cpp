@@ -1,5 +1,5 @@
 #include "TransformNode.h"
-
+#include "BaseVisitor.h"
 namespace sg
 {
 	TransformNode::TransformNode(const std::string& name):
@@ -10,6 +10,11 @@ namespace sg
 	void TransformNode::setTransform(const glm::mat4& xform)
 	{
 		mTransform = xform;
+	}
+
+	void TransformNode::visit(std::shared_ptr<BaseVisitor> visitor)
+	{
+		visitor->visit(getSharedFromThis());
 	}
 
 	std::shared_ptr<TransformNode> TransformNode::getSharedFromThis()

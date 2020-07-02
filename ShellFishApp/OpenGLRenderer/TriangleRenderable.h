@@ -23,6 +23,8 @@ namespace Graphics
 		void draw() override;
 		void drawEnd() override;
 
+		void setColor(const glm::vec4& col) { mColor = col; }
+
 	protected:
 		void updateVtx();
 
@@ -34,6 +36,7 @@ namespace Graphics
 
 		std::vector <glm::vec3> mVertexData;
 		std::vector <unsigned int> mIndexData;
+		glm::vec4 mColor;
 
 		GLSLProgram mProgram;
 	};

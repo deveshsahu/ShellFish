@@ -10,6 +10,7 @@ namespace sg
 		TransformNode(const std::string& name);
 		void setTransform(const glm::mat4& xform);
 		glm::mat4 getTransform() const { return mTransform; }
+		void visit(std::shared_ptr<BaseVisitor> visitor) override;
 
 	private:
 		std::shared_ptr<TransformNode> getSharedFromThis();

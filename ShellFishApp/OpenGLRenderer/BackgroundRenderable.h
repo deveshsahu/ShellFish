@@ -41,7 +41,6 @@ namespace Graphics
 	private:
 		void mUpdateVtx();
 		void mUpdateTex();
-		void mUploadInfo();
 
 	private:
 

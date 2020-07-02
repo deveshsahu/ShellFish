@@ -15,9 +15,9 @@ namespace view
 {
 	struct Transforms
 	{
-		glm::mat4 projectionMatrix;
-		glm::mat4 modelViewMatrix;
-		glm::mat4 mvpMatrix;
+		glm::mat4 projection;
+		glm::mat4 view;
+		glm::mat4 model = glm::mat4(1.f);
 	};
 
 	/**
@@ -38,6 +38,9 @@ namespace view
 		void visit(std::shared_ptr<sg::MeshNode> meshnode) override;
 		void visit(std::shared_ptr<sg::GroupNode> grpnode) override;
 		//void visit(std::shared_ptr<sg::Node> node) override;
+
+		glm::mat4 getProjectionMatrix() const { return mTransforms.projection; }
+		glm::mat4 getViewMatrix() const { return mTransforms.view; }
 		
 	private:
 		std::shared_ptr<RenderVisitor> getSharedFromThis();

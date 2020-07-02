@@ -38,7 +38,12 @@ namespace loader
 	bool copyMeshData(std::shared_ptr<sg::MeshNode>& meshNode, const aiMesh& aimesh)
 	{
 		unsigned int numvtx = aimesh.mNumVertices;
-		meshNode->addVertexData(aimesh.mVertices, numvtx);
+		std::vector<glm::vec3> vtxData;
+		for (int i = 0; i < numvtx; ++i)
+		{
+			vtxData.emplace_back(aimesh.mVertices[i][0], aimesh.mVertices[i][1], aimesh.mVertices[i][2]);
+		}
+		meshNode->addVertexData(vtxData);
 		// TODO Construct material 
 		// Uniform block will be initialized based on shader passed.
 		// Write a universal shader that supports rendering all material types
@@ -52,7 +57,7 @@ namespace loader
 				indexList.push_back(aimesh.mFaces[i].mIndices[j]);
 			}
 		}
-		meshNode->addIndexData(indexList.data(), indexList.size());
+		meshNode->addIndexData(indexList);
 		return true;
 	}
 
@@ -118,7 +123,7 @@ namespace loader
 				std::vector<glm::vec3> vtxList(mesh->mNumVertices);
 				for (int i = 0; i < mesh->mNumVertices; ++i)
 					vtxList[i] = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-				meshNode->addVertexData(vtxList.data(), mesh->mNumVertices);
+				meshNode->addVertexData(vtxList);
 			}
 
 			if (scene->mMeshes[0]->HasFaces())
@@ -133,7 +138,7 @@ namespace loader
 					memcpy_s(mesh->mFaces[i].mIndices, mesh->mFaces[i].mNumIndices, &idxList[start], mesh->mFaces[i].mNumIndices);
 					start += mesh->mFaces[i].mNumIndices;
 				}
-				meshNode->addVertexData(idxList.data(), idxList.size());
+				meshNode->addIndexData(idxList);
 			}
 			meshNode->finalize();
 		}

@@ -11,6 +11,7 @@ namespace Graphics
 	class OpenGLGraphics;
 	class BaseRenderable;
 	class BackgroundRenderable;
+	class ViewBufferObject;
 }
 namespace view
 {
@@ -33,6 +34,7 @@ namespace view
 		glm::ivec2 mViewportSize;
 		std::vector < std::weak_ptr<Graphics::BaseRenderable >> mRenderableList;
 		std::shared_ptr<Graphics::BackgroundRenderable> mBackground;
+		std::shared_ptr<Graphics::ViewBufferObject> mViewBO;
 
 		bool mSceneDirty = true;
 	};

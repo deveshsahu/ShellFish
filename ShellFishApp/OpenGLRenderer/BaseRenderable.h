@@ -1,6 +1,7 @@
 #pragma once
 
 #include "opengl.h"
+#include <glm/glm.hpp>
 #include <string>
 
 namespace Graphics
@@ -27,8 +28,8 @@ namespace Graphics
 		virtual void drawEnd() {}
 
 		std::string getName() { return m_Name; }
-
-		void setViewMatrixUniformBuffer(GLuint bufferID) { mViewMatrixUniformBufferID = bufferID; }
+		void setModelMatrix(const glm::mat4& mat) { mModelMatrix = mat; }
+		glm::mat4 getModelMatrix() const { return mModelMatrix; }
 
 		void unsetDirty(int flag) { m_DirtyFlag &= ~flag; }
 		void setDirty(int flag) { m_DirtyFlag |= flag; }
@@ -37,6 +38,6 @@ namespace Graphics
 	protected:
 		std::string m_Name;
 		size_t m_DirtyFlag = 0;
-		GLuint mViewMatrixUniformBufferID = ~0;
+		glm::mat4 mModelMatrix = glm::mat4(1.f);
 	};
 }// namespace Graphics

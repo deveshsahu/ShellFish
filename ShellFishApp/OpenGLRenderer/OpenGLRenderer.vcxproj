@@ -140,6 +140,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TriangleRenderable.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="ViewBufferObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundRenderable.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="TriangleRenderable.h" />
     <ClInclude Include="UniqueIDGenerator.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="viewBufferObject.h" />
     <ClInclude Include="ViewMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

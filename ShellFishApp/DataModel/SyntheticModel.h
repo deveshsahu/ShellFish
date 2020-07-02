@@ -9,7 +9,5 @@ namespace model
 	public:
 		bool load(const std::string& fileName = "");
 
-	private:
-
 	};
 }

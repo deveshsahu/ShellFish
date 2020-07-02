@@ -51,7 +51,7 @@ namespace Graphics
 				mInitFailed = true;
 				return;
 			}
-			renderable->setViewMatrixUniformBuffer(mViewMatrixBuffer);
+			//renderable->setViewMatrixUniformBuffer(mViewMatrixBuffer);
 		}
 
 		if (mBackgroundRenderTarget.create())

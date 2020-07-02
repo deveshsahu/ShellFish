@@ -22,12 +22,12 @@ namespace model
 		// Create two transform nodes
 		auto xformnode1 = std::make_shared<sg::TransformNode>("mesh1 xform");
 		glm::mat4 xform = glm::scale(glm::mat4(1.f), glm::vec3(0.2f));
-		xform = glm::translate(glm::mat4(1.f), glm::vec3(0, 0.0, 10))*xform;
+		xform = glm::translate(glm::mat4(1.f), glm::vec3(-0.5, 0.2, 0))*xform;
 		xformnode1->setTransform(xform);
 
 		auto xformnode2 = std::make_shared<sg::TransformNode>("mesh2 xform");
 		xform = glm::scale(glm::mat4(1.f), glm::vec3(0.5f));
-		xform = glm::translate(glm::mat4(1.f), glm::vec3(0.0, 0.0f, 20)) * xform;
+		xform = glm::translate(glm::mat4(1.f), glm::vec3(0.5, 0.0f, 0)) * xform;
 		xformnode2->setTransform(xform);
 
 		// Mesh data
@@ -66,16 +66,18 @@ namespace model
 
 		// Create mesh node 
 		auto meshnode1 = std::make_shared<sg::MeshNode>("mesh1");
-		meshnode1->addVertexData(vtxdata.data(), vtxdata.size());
-		meshnode1->addIndexData(idxData.data(), idxData.size());
+		meshnode1->addVertexData(vtxdata);
+		meshnode1->addIndexData(idxData);
 
 		auto meshnode2 = std::make_shared<sg::MeshNode>("mesh2");
-		meshnode2->addVertexData(vtxdata.data(), vtxdata.size());
-		meshnode2->addIndexData(idxData.data(), idxData.size());
+		meshnode2->addVertexData(vtxdata);
+		meshnode2->addIndexData(idxData);
+
+		meshnode1->setColor(glm::vec4(1, 0, 0, 1));
+		meshnode2->setColor(glm::vec4(0, 1, 0, 1));
 
 		meshnode1->finalize();
 		meshnode2->finalize();
-
 
 		mSceneGraphRoot = camnode;
 		camnode->addChild(grpnode);
@@ -85,8 +87,6 @@ namespace model
 
 		xformnode1->addChild(meshnode1);
 		xformnode2->addChild(meshnode2);
-
-		
 
 		return false;
 	}

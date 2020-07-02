@@ -67,12 +67,12 @@ namespace Graphics
 	void ShaderLibrary::initializeDefaultShaders()
 	{
 		// Load shaders
-		addShaderFromFile("SimpleVertex", "Shader/simple.vs", SHADER_TYPE::VERT);
-		addShaderFromFile("SimpleFragment", "Shader/simple.fs", SHADER_TYPE::FRAG);
-		addShaderFromFile("BackgroundVertex", "Shader/background.vs", SHADER_TYPE::VERT);
-		addShaderFromFile("BackgroundFragment", "Shader/background.fs", SHADER_TYPE::FRAG);
-		addShaderFromFile("ResolveVertex", "Shader/resolve.vs", SHADER_TYPE::VERT);
-		addShaderFromFile("ResolveFragment", "Shader/resolve.fs", SHADER_TYPE::FRAG);
+		addShaderFromFile("SimpleVertex", "../Shader/simple.vs", SHADER_TYPE::VERT);
+		addShaderFromFile("SimpleFragment", "../Shader/simple.fs", SHADER_TYPE::FRAG);
+		addShaderFromFile("BackgroundVertex", "../Shader/background.vs", SHADER_TYPE::VERT);
+		addShaderFromFile("BackgroundFragment", "../Shader/background.fs", SHADER_TYPE::FRAG);
+		addShaderFromFile("ResolveVertex", "../Shader/resolve.vs", SHADER_TYPE::VERT);
+		addShaderFromFile("ResolveFragment", "../Shader/resolve.fs", SHADER_TYPE::FRAG);
 	}
 	ShaderLibrary::ShaderLibrary()
 	{

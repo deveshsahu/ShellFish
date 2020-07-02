@@ -20,8 +20,8 @@ namespace view
 
 	void RenderVisitor::visit(std::shared_ptr<sg::CameraNode> camnode)
 	{
-		mTransforms.projectionMatrix = camnode->getProjectionMatrix();
-		mTransforms.modelViewMatrix = camnode->getCameraMatrix();
+		mTransforms.projection = camnode->getProjectionMatrix();
+		mTransforms.view = camnode->getCameraMatrix();
 
 		if (auto child = camnode->getChild())
 		{
@@ -31,14 +31,19 @@ namespace view
 
 	void RenderVisitor::visit(std::shared_ptr<sg::TransformNode> xformnode)
 	{
-		mTransforms.modelViewMatrix *= xformnode->getTransform();
+		auto xform = xformnode->getTransform();
+		mTransforms.model *= xform;
 		for (auto& child : xformnode->getChildren())
 			child->visit(getSharedFromThis());
+		mTransforms.model *= glm::inverse(xform);
 	}
 
 	void RenderVisitor::visit(std::shared_ptr<sg::MeshNode> meshnode)
 	{
-		mRenderableList.push_back(meshnode->getRenderable());
+		auto renderable = meshnode->getRenderable();
+		if (!renderable.expired())
+			renderable.lock()->setModelMatrix(mTransforms.model);
+		mRenderableList.push_back(renderable);
 	}
 
 	void RenderVisitor::visit(std::shared_ptr<sg::GroupNode> node)

@@ -1,5 +1,6 @@
 #include "BackgroundRenderable.h"
 #include "utils.h"
+#include "GLUtils.h"
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -10,11 +11,6 @@ namespace Graphics
 	{
 		setDirty(VTX);
 	}
-
-	/*void BackgroundRenderable::setInfo(const bkgInfo & info)
-	{
-		mInfo = info;
-	}*/
 
 	bool BackgroundRenderable::init()
 	{
@@ -30,6 +26,9 @@ namespace Graphics
 
 		GLint blockSize;
 		auto program = mProgram.getProgramHandle();
+
+		// Remove all the 'Get*' statements here
+
 		GLuint blockIndex = glGetUniformBlockIndex(program, "bkgInfo");
 		glGetActiveUniformBlockiv(program, blockIndex, GL_UNIFORM_BLOCK_DATA_SIZE, &blockSize);
 		GLubyte * blockBuffer = (GLubyte*)malloc(blockSize);
@@ -47,19 +46,21 @@ namespace Graphics
 		glGenBuffers(1, &mUniformBlock);
 		glBindBuffer(GL_UNIFORM_BUFFER, mUniformBlock);
 		glBufferData(GL_UNIFORM_BUFFER, blockSize, blockBuffer, GL_DYNAMIC_DRAW);
-
+		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 		return true;
 	}
 
 	void BackgroundRenderable::draw()
 	{
 		mProgram.useProgram();
-		glActiveTexture(GL_TEXTURE0);
-
 		glBindBufferBase(GL_UNIFORM_BUFFER, 1, mUniformBlock); // Binding point-> binding = 1
+		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 		glBindVertexArray(m_vao);
 		if (mInfo.type == bkgType::IMG)
+		{
+			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, m_tex);
+		}
 		GLUtils::checkForOpenGLError(__FILE__, __LINE__);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glBindVertexArray(0);
@@ -105,8 +106,5 @@ namespace Graphics
 		else
 			mInfo.type = bkgType::SOLID;
 		unsetDirty(TEX);
-	}
-	void BackgroundRenderable::mUploadInfo()
-	{
 	}
 }
