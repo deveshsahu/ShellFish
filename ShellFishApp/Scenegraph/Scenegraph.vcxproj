@@ -138,6 +138,8 @@
     <ClInclude Include="GroupNode.h" />
     <ClInclude Include="MeshNode.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="OrthoCamNode.h" />
+    <ClInclude Include="PerspectiveCamNode.h" />
     <ClInclude Include="TransformNode.h" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +147,8 @@
     <ClCompile Include="GroupNode.cpp" />
     <ClCompile Include="MeshNode.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="OrthoCamNode.cpp" />
+    <ClCompile Include="PerspectiveCamNode.cpp" />
     <ClCompile Include="TransformNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,18 +9,6 @@ namespace sg
 	{
 	}
 
-	void CameraNode::setOrthoParam(double xmag, double ymag, double znear, double zfar)
-	{
-		mCamType = CamType::ctOrtho;
-		mProjectionMat = glm::ortho(-xmag / 2.0, xmag / 2.0, -ymag / 2.0, ymag / 2.0, znear, zfar);
-	}
-
-	void CameraNode::setPerspParam(double fovy, double aspectratio, double znear, double zfar)
-	{
-		mCamType = CamType::ctPersp;
-		mProjectionMat = glm::perspective(fovy, aspectratio, znear, zfar);
-	}
-
 	void CameraNode::setCamera(const glm::vec3& eye, const glm::vec3& center, const glm::vec3& up)
 	{
 		mCameraMat = glm::lookAt(eye, center, up);

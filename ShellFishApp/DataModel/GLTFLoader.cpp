@@ -20,7 +20,8 @@
 #endif
 #include <tiny_gltf/tiny_gltf.h>
 
-#include "../Scenegraph/CameraNode.h"
+#include "../Scenegraph/OrthoCamNode.h"
+#include "../Scenegraph/PerspectiveCamNode.h"
 
 namespace loader
 {
@@ -31,19 +32,27 @@ namespace loader
 		if (model.cameras.size() > 0)
 		{
 			auto& cam = model.cameras[0];
-			auto cameranode = std::make_shared<sg::CameraNode>();
+			std::shared_ptr<sg::CameraNode> cameranode;
 			if (cam.type == "orthographic")
-				cameranode->setOrthoParam(cam.orthographic.xmag, cam.orthographic.ymag, cam.orthographic.znear, cam.orthographic.zfar);
+			{
+				auto orthonode = std::make_shared < sg::OrthoCamNode > ();
+				orthonode->setOrthoParam(cam.orthographic.xmag, cam.orthographic.ymag, cam.orthographic.znear, cam.orthographic.zfar);
+				cameranode = orthonode;
+			}
 			else
-				cameranode->setPerspParam(cam.perspective.aspectRatio, cam.perspective.yfov, cam.perspective.znear, cam.perspective.zfar);
+			{
+				auto perspcamnode = std::make_shared<sg::PerspectiveCamNode>();
+				perspcamnode->setPerspParam(cam.perspective.aspectRatio, cam.perspective.yfov, cam.perspective.znear, cam.perspective.zfar);
+				cameranode = perspcamnode;
+			}
 			root = cameranode;
 			return cameranode;
 		}
 		else
 		{
-			auto camnode = std::make_shared<sg::CameraNode>();
-			camnode->setOrthoParam(1.0, 1.0, 0.1, 100.0);
-			root = camnode;
+			auto orthonode = std::make_shared < sg::OrthoCamNode >();
+			orthonode->setOrthoParam(1.0, 1.0, 0.1, 100.0);
+			root = orthonode;
 		}
 		
 		return root;

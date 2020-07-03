@@ -1,5 +1,6 @@
 #include "RenderVisitor.h"
-#include "CameraNode.h"
+#include "PerspectiveCamNode.h"
+#include "OrthoCamNode.h"
 #include "MeshNode.h"
 #include "TransformNode.h"
 
@@ -22,7 +23,7 @@ namespace view
 	{
 		mTransforms.projection = camnode->getProjectionMatrix();
 		mTransforms.view = camnode->getCameraMatrix();
-
+		mCameraNode = camnode;
 		if (auto child = camnode->getChild())
 		{
 			child->visit(getSharedFromThis());

@@ -31,20 +31,22 @@ namespace view
 	class RenderVisitor : public sg::BaseVisitor
 	{
 	public:
+
 		RenderVisitor(std::vector<std::weak_ptr<Graphics::BaseRenderable>>& inRenderableList);
 		~RenderVisitor();
 		void visit(std::shared_ptr<sg::CameraNode> camnode) override;
 		void visit(std::shared_ptr<sg::TransformNode> xformnode) override;
 		void visit(std::shared_ptr<sg::MeshNode> meshnode) override;
 		void visit(std::shared_ptr<sg::GroupNode> grpnode) override;
-		//void visit(std::shared_ptr<sg::Node> node) override;
 
 		glm::mat4 getProjectionMatrix() const { return mTransforms.projection; }
 		glm::mat4 getViewMatrix() const { return mTransforms.view; }
+		std::weak_ptr<sg::CameraNode> getCameraNode() const { return mCameraNode; }
 		
 	private:
 		std::shared_ptr<RenderVisitor> getSharedFromThis();
 		Transforms mTransforms;
+		std::weak_ptr<sg::CameraNode> mCameraNode;
 		std::vector<std::weak_ptr<Graphics::BaseRenderable>>& mRenderableList;
 	};
 }

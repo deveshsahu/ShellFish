@@ -1,6 +1,6 @@
 #include "SyntheticModel.h"
 
-#include "../Scenegraph/CameraNode.h"
+#include "../Scenegraph/PerspectiveCamNode.h"
 #include "../Scenegraph/MeshNode.h"
 #include "../Scenegraph/TransformNode.h"
 #include <glm/gtx/transform.hpp>
@@ -11,18 +11,17 @@ namespace model
 	bool SyntheticModel::load(const std::string& fileName)
 	{
 		// Create a synthetic model here
-		auto camnode = std::make_shared<sg::CameraNode>();
+		auto camnode = std::make_shared<sg::PerspectiveCamNode>();
 		camnode->setPerspParam(45.f, 1.33f, 0.01f, 1000.f); // Projection matrix fov, aspect ratio, near and far planes
 		camnode->setCamera(glm::vec3(1, 1, -1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)); // eye position, model's center and up direction
 
 		// Create Group Node
 		auto grpnode = std::make_shared<sg::GroupNode>("Group mesh");
 		
-
 		// Create two transform nodes
 		auto xformnode1 = std::make_shared<sg::TransformNode>("mesh1 xform");
-		glm::mat4 xform = glm::scale(glm::mat4(1.f), glm::vec3(0.2f));
-		xform = glm::translate(glm::mat4(1.f), glm::vec3(-0.5, 0.2, 0))*xform;
+		glm::mat4 xform = glm::scale(glm::mat4(1.f), glm::vec3(0.5f));
+		xform = glm::translate(glm::mat4(1.f), glm::vec3(-0.5, 0.0, 0))*xform;
 		xformnode1->setTransform(xform);
 
 		auto xformnode2 = std::make_shared<sg::TransformNode>("mesh2 xform");

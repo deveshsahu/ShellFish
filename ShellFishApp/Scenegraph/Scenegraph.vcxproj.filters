@@ -33,7 +33,10 @@
     <ClInclude Include="BaseVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseRenderable.h">
+    <ClInclude Include="PerspectiveCamNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthoCamNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeshNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthoCamNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

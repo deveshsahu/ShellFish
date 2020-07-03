@@ -6,6 +6,8 @@ namespace sg
 	class Node;
 	class MeshNode;
 	class CameraNode;
+	class PerspectiveCamNode;
+	class OrthoCamNode;
 	class TransformNode;
 	class GroupNode;
 	class BaseVisitor : public std::enable_shared_from_this<BaseVisitor>
@@ -20,6 +22,8 @@ namespace sg
 
 		virtual void visit(std::shared_ptr<Node> node) {}
 		virtual void visit(std::shared_ptr<CameraNode> camnode) {}
+		//virtual void visit(std::shared_ptr<PerspectiveCamNode> camnode) {}
+		//virtual void visit(std::shared_ptr<OrthoCamNode> camnode) {}
 		virtual void visit(std::shared_ptr<TransformNode> xformnode) {}
 		virtual void visit(std::shared_ptr<MeshNode> meshnode) {}
 		virtual void visit(std::shared_ptr<GroupNode> grpnode) {}

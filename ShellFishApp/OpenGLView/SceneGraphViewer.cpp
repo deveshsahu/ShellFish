@@ -2,6 +2,8 @@
 #include "Graphics.h"
 #include "RenderVisitor.h"
 #include "Node.h"
+#include "PerspectiveCamNode.h"
+#include "OrthoCamNode.h"
 #include "BackgroundRenderable.h"
 #include "viewBufferObject.h"
 namespace view
@@ -15,7 +17,6 @@ namespace view
 	bool SceneGraphViewer::init()
 	{
 		mOGLGraphics.initGL();
-		mOGLGraphics.viewport(0, 0, mViewportSize[0], mViewportSize[1]);
 		mViewBO = std::make_shared<Graphics::ViewBufferObject>();
 		return true;
 	}
@@ -42,6 +43,29 @@ namespace view
 		mSceneDirty = dirty;
 	}
 
+	void SceneGraphViewer::resizeWindow(int width, int height)
+	{
+		mViewportSize[0] = width;
+		mViewportSize[1] = height;
+
+		if (auto camnode = mCameraNode.lock())
+		{
+			auto camtype = camnode->getCameraType();
+			double aspect_ratio = (double)width / (double)height;
+			if (camtype == sg::CamType::ctPersp)
+			{
+				auto persp_cam_node = std::static_pointer_cast<sg::PerspectiveCamNode>(camnode);
+				persp_cam_node->updateAspectRatio(aspect_ratio);
+			}
+			else if (camtype == sg::CamType::ctOrtho)
+			{
+				auto ortho_cam_node = std::static_pointer_cast<sg::OrthoCamNode>(camnode);
+				ortho_cam_node->updateAspectRatio(aspect_ratio);
+			}
+			mViewBO->setProjectionMatrix(camnode->getProjectionMatrix());
+		}
+	}
+
 	bool SceneGraphViewer::prepareDraw(std::shared_ptr<sg::Node>& root)
 	{
 		// Only perform prep if list is empty or scene is dirty	
@@ -54,6 +78,7 @@ namespace view
 				if (auto renderable = renderableWk.lock())
 					renderable->init();
 			}
+			mCameraNode = renderVisitor->getCameraNode();
 			mViewBO->init();
 			mViewBO->setProjectionMatrix(renderVisitor->getProjectionMatrix());
 			mViewBO->setViewMatrix(renderVisitor->getViewMatrix());
@@ -72,6 +97,7 @@ namespace view
 
 	bool SceneGraphViewer::draw()
 	{
+		mOGLGraphics.viewport(0, 0, mViewportSize[0], mViewportSize[1]);
 		mOGLGraphics.clear(glm::vec4(0.0, 0.0, 0.0, 1.f));
 		mViewBO->update();
 		mViewBO->bind();

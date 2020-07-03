@@ -6,6 +6,7 @@
 #include "../Scenegraph/MeshNode.h"
 #include "../Scenegraph/TransformNode.h"
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 namespace loader
 {
@@ -106,9 +107,8 @@ namespace loader
 		}
 		else
 		{
-			camNode->setOrthoParam(1, 1, 0.1, 100);
+			camNode->setCameraMatrix(glm::ortho(1.f, 1.f, 0.1f, 1000.f));
 		}
-
 
 		auto modelBaseNode = std::make_shared<sg::GroupNode>("Base Node");
 		camNode->addChild(modelBaseNode);

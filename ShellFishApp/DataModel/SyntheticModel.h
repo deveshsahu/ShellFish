@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Model.h"
 
 namespace model
@@ -8,6 +7,5 @@ namespace model
 	{
 	public:
 		bool load(const std::string& fileName = "");
-
 	};
 }

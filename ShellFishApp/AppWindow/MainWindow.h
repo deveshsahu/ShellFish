@@ -44,6 +44,8 @@ namespace controller
 		std::weak_ptr<model::Model> mModel;
 		std::shared_ptr<view::SceneGraphViewer> mViewer;
 
+		static MainWindow* mstaticWindowPtr;
+
 		int mWidth = 1024;
 		int mHeight = 768;
 	};

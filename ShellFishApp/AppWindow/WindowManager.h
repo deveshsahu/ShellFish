@@ -11,8 +11,6 @@ namespace controller
 
 		static WindowManager& getInstance();
 
-
-
 	private:
 		WindowManager();
 	};

@@ -7,6 +7,8 @@
 
 namespace controller
 {
+	MainWindow* MainWindow::mstaticWindowPtr = nullptr;
+
 	void MainWindow::run()
 	{
 		mInitWindow();
@@ -16,7 +18,12 @@ namespace controller
 
 	void MainWindow::onWindowResized(GLFWwindow* window, int width, int height)
 	{
-
+		if (mstaticWindowPtr)
+		{
+			mstaticWindowPtr->mWidth = width;
+			mstaticWindowPtr->mHeight = height;
+			mstaticWindowPtr->mViewer->resizeWindow(width, height);
+		}
 	}
 
 	void MainWindow::onMouseMove(GLFWwindow* w, double xpos, double ypos)
@@ -125,6 +132,7 @@ namespace controller
 		glfwMakeContextCurrent(mGLWindow);
 		mViewer = std::make_shared<view::SceneGraphViewer>(glm::ivec2(mWidth, mHeight));
 		mViewer->init();
+		mstaticWindowPtr = this;
 	}
 
 	void MainWindow::mMainLoop()
